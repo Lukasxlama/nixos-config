@@ -12,6 +12,8 @@
   home.packages = with pkgs; [
     vscode
     btop
+    firefox
+    bitwarden-desktop
   ];
 
   programs.home-manager.enable = true;
