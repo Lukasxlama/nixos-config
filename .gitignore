@@ -1,0 +1,19 @@
+# Nix / NixOS
+result
+result-*
+.direnv/
+.venv/
+
+# QEMU / Virtualisation
+*.qcow2
+*.img
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# System / Shell
+.DS_Store
+.history
