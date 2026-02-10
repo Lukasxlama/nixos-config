@@ -4,6 +4,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      # Cursor-Fix für den Start
+      exec-once = [
+        "hyprctl setcursor Bibata-Modern-Classic 24"
+      ];
       input = {
         kb_layout = "de";
         kb_variant = "";
@@ -14,7 +18,6 @@
         "$mod, Return, exec, kitty"
         "CONTROL_$mod, Return, exec, wofi --show drun"
         "$mod, Q, killactive,"
-
         "$mod_SHIFT, M, exit,"
       ];
       monitor = [
@@ -22,7 +25,4 @@
       ];
     };
   };
-
-  programs.kitty.enable = true;
-  programs.wofi.enable = true;
 }
