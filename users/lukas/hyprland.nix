@@ -4,13 +4,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      # --- Autostart ---
-      # Setzt den Cursor beim Hyprland-Start (Fix für leeren Desktop)
       exec-once = [
         "hyprctl setcursor Bibata-Modern-Classic 24"
       ];
 
-      # --- Monitor & Input ---
       monitor = [
         ",preferred,auto,1"
       ];
@@ -19,16 +16,14 @@
         kb_layout = "de";
         kb_variant = "";
         follow_mouse = 1;
-        touchpad.natural_scroll = false;
+        touchpad.natural_scroll = true;
       };
 
-      # --- Look & Feel ---
       general = {
         gaps_in = 5;
         gaps_out = 20;
         border_size = 2;
-        # Farbverlauf passend zum Orchis-Theme
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        "col.active_border" = "rgba(ffffffff)";
         "col.inactive_border" = "rgba(595959aa)";
         layout = "dwindle";
       };
@@ -36,20 +31,18 @@
       decoration = {
         rounding = 10;
         
-        # Standard-Verhalten: Aktiv = Deckend, Inaktiv = Transparent
-        active_opacity = 0.9;
-        inactive_opacity = 0.8;
+        active_opacity = 1.0;
+        inactive_opacity = 0.9;
 
         blur = {
           enabled = true;
           size = 6;
-          passes = 3; # Hohe Qualität für echte Hardware
+          passes = 3;
           new_optimizations = true;
-          ignore_opacity = true; # Wichtig, damit Blur auch bei Transparenz wirkt
+          ignore_opacity = true;
           xray = false;
         };
 
-        # Schatten-Konfiguration (Neue Syntax Struktur)
         shadow = {
           enabled = true;
           range = 15;
@@ -58,7 +51,6 @@
         };
       };
 
-      # --- Animationen ---
       animations = {
         enabled = true;
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
@@ -71,13 +63,11 @@
         ];
       };
 
-      # --- Layout (Dwindle) ---
       dwindle = {
         pseudotile = true;
         preserve_split = true;
       };
 
-      # --- Keybinds ---
       "$mod" = "SUPER";
       bind = [
         "$mod, Return, exec, kitty"
@@ -85,16 +75,33 @@
         "$mod, Q, killactive,"
         "$mod SHIFT, M, exit,"
         "$mod, V, togglefloating,"
+        "$mod, F, fullscreen,"
         "$mod, P, pseudo," 
         "$mod, J, togglesplit," 
-      ];
 
-      # --- Window Rules (v1 Syntax) ---
-      # Syntax: COMMAND, REGEX
-      windowrule = [
-        # Erzwingt Transparenz für Kitty (auch wenn aktiv)
-        # 'override' hilft Hyprland, die Werte korrekt zu parsen
-        "opacity 0.9 override 0.8 override, ^(kitty)$"
+        "$mod, 1, workspace, 1"
+        "$mod, 2, workspace, 2"
+        "$mod, 3, workspace, 3"
+        "$mod, 4, workspace, 4"
+        "$mod, 5, workspace, 5"
+        "$mod, 6, workspace, 6"
+        "$mod, 7, workspace, 7"
+        "$mod, 8, workspace, 8"
+        "$mod, 9, workspace, 9"
+        "$mod, 0, workspace, 10"
+
+        "$mod SHIFT, 1, movetoworkspace, 1"
+        "$mod SHIFT, 2, movetoworkspace, 2"
+        "$mod SHIFT, 3, movetoworkspace, 3"
+        "$mod SHIFT, 4, movetoworkspace, 4"
+        "$mod SHIFT, 5, movetoworkspace, 5"
+        "$mod SHIFT, 6, movetoworkspace, 6"
+        "$mod SHIFT, 7, movetoworkspace, 7"
+        "$mod SHIFT, 8, movetoworkspace, 8"
+        "$mod SHIFT, 9, movetoworkspace, 9"
+        "$mod SHIFT, 0, movetoworkspace, 10"
+
+        "$mod CONTROL SHIFT, B, exec, kitty --title 'NixOS Rebuild' sh -c 'sudo nixos-rebuild switch --flake /home/lukas/nixos-config#$(hostname) && notify-send \"System aktualisiert!\" || notify-send \"Rebuild fehlgeschlagen!\"'"
       ];
     };
   };

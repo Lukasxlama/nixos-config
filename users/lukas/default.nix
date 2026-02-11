@@ -4,6 +4,7 @@
   imports = [
     ./shell.nix
     ./hyprland.nix
+    ./waybar.nix
     ./programs.nix
     ./theme.nix
   ];
