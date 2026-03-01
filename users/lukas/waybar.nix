@@ -16,83 +16,94 @@ in
     systemd.enable = true;
     systemd.target = "hyprland-session.target";
 
-    settings = [{
-      layer = "top";
-      position = "top";
-      height = 42;
-      margin-top = 4;
-      margin-left = 8;
-      margin-right = 8;
-      spacing = 0;
+    settings = [
+      {
+        layer = "top";
+        position = "top";
+        height = 42;
+        margin-top = 4;
+        margin-left = 8;
+        margin-right = 8;
+        spacing = 0;
 
-      modules-left = [ 
-        "custom/appmenu" 
-        "hyprland/workspaces" 
-      ];
+        modules-left = [
+          "custom/appmenu"
+          "hyprland/workspaces"
+        ];
 
-      "custom/appmenu" = {
-        format = "";
-        on-click = "rofi -show drun";
-      };
+        "custom/appmenu" = {
+          format = "";
+          on-click = "rofi -show drun";
+        };
 
-      "hyprland/workspaces" = {
-        on-scroll-up = "hyprctl dispatch workspace r-1";
-        on-scroll-down = "hyprctl dispatch workspace r+1";
-        format = "{icon}";
-        on-click = "activate";
-      };
+        "hyprland/workspaces" = {
+          on-scroll-up = "hyprctl dispatch workspace r-1";
+          on-scroll-down = "hyprctl dispatch workspace r+1";
+          format = "{icon}";
+          on-click = "activate";
+        };
 
-      modules-center = [ 
-        "hyprland/window" 
-      ];
-      
-      "hyprland/window" = {
-        max-length = 40;
-        separate-outputs = true;
-      };
+        modules-center = [
+          "hyprland/window"
+        ];
 
-      modules-right = [ 
-        "pulseaudio"
-        "network"
-        "battery"
-        "tray"
-        "custom/exit"
-        "clock"
-      ];
+        "hyprland/window" = {
+          max-length = 40;
+          separate-outputs = true;
+        };
 
-      "network" = {
-        "format-wifi" = ""; 
-        "format-ethernet" = "";
-        "format-disconnected" = "⚠";
-        "tooltip-format" = "{essid} ({signalStrength}%)";
-        "on-click" = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
-      };
+        modules-right = [
+          "pulseaudio"
+          "network"
+          "battery"
+          "tray"
+          "custom/exit"
+          "clock"
+        ];
 
-      "battery" = {
-        "states" = { "warning" = 30; "critical" = 15; };
-        "format" = "{icon} {capacity}%";
-        "format-charging" = " {capacity}%";
-        "format-plugged" = " {capacity}%";
-        "format-icons" = ["" "" "" "" ""];
-      };
+        "network" = {
+          "format-wifi" = "";
+          "format-ethernet" = "";
+          "format-disconnected" = "⚠";
+          "tooltip-format" = "{essid} ({signalStrength}%)";
+          "on-click" = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+        };
 
-      "tray" = {
-        "icon-size" = 18;
-        "spacing" = 10;
-      };
+        "battery" = {
+          "states" = {
+            "warning" = 30;
+            "critical" = 15;
+          };
+          "format" = "{icon} {capacity}%";
+          "format-charging" = " {capacity}%";
+          "format-plugged" = " {capacity}%";
+          "format-icons" = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+        };
 
-      "custom/exit" = {
-        "format" = "";
-        "on-click" = "${pkgs.wlogout}/bin/wlogout -b 2";
-        "tooltip" = false;
-      };
+        "tray" = {
+          "icon-size" = 18;
+          "spacing" = 10;
+        };
 
-      "clock" = {
-        "interval" = 1;
-        "format" = "{:%H:%M:%S - %d.%m.%y}";
-        "tooltip-format" = "<tt><small>{calendar}</small></tt>";
-      };    
-    }];
+        "custom/exit" = {
+          "format" = "";
+          "on-click" = "${pkgs.wlogout}/bin/wlogout -b 2";
+          "tooltip" = false;
+        };
+
+        "clock" = {
+          "interval" = 1;
+          "format" = "{:%H:%M:%S - %d.%m.%y}";
+          "tooltip-format" = "<tt><small>{calendar}</small></tt>";
+        };
+      }
+    ];
 
     style = ''
       * {
