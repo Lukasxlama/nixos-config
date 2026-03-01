@@ -19,7 +19,10 @@
     tree
     curl
     wget
-    unzip
     zip
+    unzip
+    ffmpeg
+    swaynotificationcenter
+    libnotify
   ];
 }

@@ -1,10 +1,15 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  osConfig,
+  lib,
+  ...
+}:
 
 let
   colors = {
     bar_bg = "rgba(0, 0, 0, 0)";
-    module_bg = "rgba(39, 29, 27, 0.8)";
-    border = "rgba(160, 140, 135, 0.2)";
+    module_bg = "rgba(20, 20, 20, 0.8)";
+    border = "rgba(255, 255, 255, 0.1)";
     primary = "#ffb59f";
     text = "#f1dfda";
     text_dim = "#d8c2bc";
@@ -54,18 +59,52 @@ in
 
         modules-right = [
           "pulseaudio"
+          "bluetooth"
           "network"
-          "battery"
-          "tray"
+        ]
+        ++ lib.optionals (osConfig.networking.hostName != "pc") [ "battery" ]
+        ++ [
+          "custom/notification"
           "custom/exit"
           "clock"
         ];
 
+        "pulseaudio" = {
+          format = "{icon} {volume}%";
+          format-muted = "󰝟";
+          format-icons = {
+            default = [
+              "󰕿"
+              "󰖀"
+              "󰕾"
+            ];
+          };
+          on-click = "pavucontrol";
+        };
+
+        "bluetooth" = {
+          "format" = "";
+          "format-connected" = " {device_alias}";
+          "format-connected-battery" = " {device_alias} {device_battery_percentage}%";
+          "tooltip-format" = "{controller_alias}\t{controller_address}\n\n{num_connections} verbunden";
+          "tooltip-format-connected" =
+            "{controller_alias}\t{controller_address}\n\n{num_connections} verbunden\n\n{device_enumerate}";
+          "tooltip-format-enumerate-connected" = "{device_alias}\t{device_address}";
+          "tooltip-format-enumerate-connected-battery" =
+            "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+          "on-click" = "${pkgs.blueman}/bin/blueman-manager";
+        };
+
         "network" = {
-          "format-wifi" = "";
-          "format-ethernet" = "";
-          "format-disconnected" = "⚠";
-          "tooltip-format" = "{essid} ({signalStrength}%)";
+          "format" = "󰈀 {ifname}";
+          "format-wifi" = " {essid}";
+          "format-ethernet" = "󰈀 {ifname}";
+          "format-linked" = "󰈀 {ifname} (No IP)";
+          "format-disconnected" = "󰙐 Disconnected";
+          "tooltip-format" = "{ifname} via {gwaddr} ";
+          "tooltip-format-wifi" = "{essid} ({signalStrength}%) ";
+          "tooltip-format-ethernet" = "{ifname} ";
+          "tooltip-format-disconnected" = "Disconnected";
           "on-click" = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
         };
 
@@ -86,9 +125,23 @@ in
           ];
         };
 
-        "tray" = {
-          "icon-size" = 18;
-          "spacing" = 10;
+        "custom/notification" = {
+          tooltip = false;
+          format = "{icon}";
+          format-icons = {
+            notification = "<span foreground='red'><sup></sup></span>";
+            none = "";
+            dnd-notification = "<span foreground='red'><sup></sup></span>";
+            dnd-none = "";
+            inhibited = "";
+            dnd-inhibited = "";
+          };
+          return-type = "json";
+          exec-if = "which swaync-client";
+          exec = "swaync-client -swb";
+          on-click = "swaync-client -t -sw";
+          on-click-right = "swaync-client -d -sw";
+          escape = true;
         };
 
         "custom/exit" = {
@@ -107,7 +160,7 @@ in
 
     style = ''
       * {
-        font-family: "Fira Sans Semibold", "Font Awesome 6 Free";
+        font-family: "Fira Sans Semibold", "Symbols Nerd Font";
         font-size: 13px;
         border: none;
         border-radius: 0;
@@ -120,10 +173,11 @@ in
       #workspaces,
       #window,
       #pulseaudio,
+      #bluetooth,
       #network,
       #battery,
+      #custom-notification,
       #clock,
-      #tray,
       #custom-appmenu,
       #custom-exit {
         background-color: ${colors.module_bg};
@@ -158,9 +212,21 @@ in
 
       #custom-appmenu:hover,
       #custom-exit:hover,
-      #pulseaudio:hover {
-        background-color: ${colors.primary};
-        color: ${colors.bar_bg};
+      #pulseaudio:hover,
+      #bluetooth:hover,
+      #network:hover,
+      #battery:hover,
+      #custom-notification:hover,
+      #clock:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+
+      #bluetooth.connected {
+        color: ${colors.primary};
+      }
+
+      #bluetooth.off {
+        color: ${colors.text_dim};
       }
 
       #clock {
@@ -168,4 +234,75 @@ in
       }
     '';
   };
+
+  services.swaync = {
+    enable = true;
+  };
+
+  home.file.".config/swaync/style.css".text = ''
+    @define-color bg-color ${colors.module_bg};
+    @define-color text-color ${colors.text};
+    @define-color selected-bg ${colors.primary};
+    @define-color border-color ${colors.border};
+
+    * {
+      font-family: "Fira Sans Semibold", "Symbols Nerd Font";
+    }
+
+    .control-center {
+      background: @bg-color;
+      border: 1px solid @border-color;
+      border-radius: 12px;
+      margin: 8px;
+      padding: 4px;
+      color: @text-color;
+    }
+
+    .notification-row {
+      outline: none;
+      margin: 4px;
+      padding: 0;
+    }
+
+    .notification {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid @border-color;
+      border-radius: 12px;
+      color: @text-color;
+      padding: 8px;
+    }
+
+    .notification-content {
+      background: transparent;
+      padding: 4px;
+    }
+
+    .close-button {
+      background: @selected-bg;
+      color: #1a1a1a;
+      border-radius: 12px;
+      margin: 4px;
+    }
+
+    .control-center-title {
+      color: @selected-bg;
+      font-size: 1.2rem;
+    }
+
+    .widget-title > button {
+      background: @selected-bg;
+      color: #1a1a1a;
+      border-radius: 8px;
+      padding: 4px 12px;
+    }
+
+    .widget-dnd > switch {
+      background: @border-color;
+      border-radius: 12px;
+    }
+
+    .widget-dnd > switch:checked {
+      background: @selected-bg;
+    }
+  '';
 }
