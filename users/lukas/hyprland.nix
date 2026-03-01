@@ -7,7 +7,7 @@ let
   startWallpaper = pkgs.writeShellScript "start-wallpaper" ''
     pkill mpvpaper || true
     pkill swaybg || true
-    
+
     ${pkgs.swaybg}/bin/swaybg -i ${fallbackImage} -m fill &
     SWAYBG_PID=$!
 
@@ -49,7 +49,7 @@ in
 
       decoration = {
         rounding = 10;
-        
+
         active_opacity = 1.0;
         inactive_opacity = 0.9;
 
@@ -95,10 +95,10 @@ in
         "$mod SHIFT, M, exit,"
         "$mod, V, togglefloating,"
         "$mod, F, fullscreen,"
-        "$mod, P, pseudo," 
-        "$mod, J, togglesplit," 
+        "$mod, P, pseudo,"
+        "$mod, J, togglesplit,"
         "$mod, L, exec, hyprlock"
-        
+
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
         "$mod, 3, workspace, 3"
