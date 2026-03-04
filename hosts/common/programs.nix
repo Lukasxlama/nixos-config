@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   programs.zsh.enable = true;
@@ -15,14 +15,24 @@
     lfs.enable = true;
   };
 
+  virtualisation.docker.enable = true;
+
+  services.tailscale.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
   environment.systemPackages = with pkgs; [
     tree
     curl
-    wget
-    zip
-    unzip
-    ffmpeg
+
     swaynotificationcenter
     libnotify
+
+    davinci-resolve
+    bambu-studio
   ];
 }
