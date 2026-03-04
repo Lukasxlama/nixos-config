@@ -43,15 +43,33 @@
   };
 
   home.packages = with pkgs; [
+    firefox
+    bitwarden-desktop
+    signal-desktop
+    discord
+
+    btop
+    vlc
+    mpv
+    ffmpeg
+    yt-dlp
+    krita
+    anki-bin
+
+    yazi
+    file
+    ffmpegthumbnailer
+    imagemagick
+    poppler-utils
+    fzf
+    ripgrep
+
     hyprlock
     wlogout
     swaybg
     mpvpaper
+
     vscode
-    btop
-    firefox
-    bitwarden-desktop
-    yazi
   ];
 
   programs.kitty = {
