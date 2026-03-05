@@ -4,9 +4,9 @@
   imports = [
     ./programs.nix
     ./hyprland.nix
+    ./hyprpanel.nix
     ./hyprlock.nix
     ./theme.nix
-    ./waybar.nix
     ./rofi.nix
     ./wlogout.nix
     ./shell.nix
