@@ -40,7 +40,6 @@
     tree
     curl
 
-    swaynotificationcenter
     libnotify
     brightnessctl
     wdisplays
