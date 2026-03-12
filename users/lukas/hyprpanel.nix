@@ -5,7 +5,6 @@
   lib,
   ...
 }:
-
 {
   programs.hyprpanel = {
     enable = true;
@@ -17,6 +16,7 @@
           left = [
             "dashboard"
             "workspaces"
+            "notifications"
           ];
           middle = [ "windowtitle" ];
           right = [
@@ -24,14 +24,18 @@
             "bluetooth"
             "network"
             "battery"
-            "notifications"
             "clock"
           ];
         };
 
+        launcher.icon = "";
+
         windowtitle = {
           max_length = 40;
+          show_title = true;
+          truncate_title = true;
           title_placeholder = false;
+          icon = false;
         };
 
         workspaces = {
@@ -39,6 +43,8 @@
           show_icons = false;
           show_numbered = true;
         };
+
+        clock.format = "%H:%M:%S - %d.%m.%Y";
       };
 
       menus.dashboard = {
@@ -46,6 +52,12 @@
         shortcuts.enabled = false;
         directories.enabled = false;
         stats.enabled = true;
+
+        weather = {
+          enabled = true;
+          unit = "metric";
+          location = "Vienna";
+        };
       };
 
       system.battery.device = "BAT0";
@@ -66,6 +78,8 @@
       };
     };
   };
+
+  services.swaync.enable = false;
 
   home.packages = with pkgs; [
     hyprpicker

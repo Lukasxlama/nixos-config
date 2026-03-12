@@ -140,8 +140,6 @@ in
         ", XF86Display, exec, wdisplays"
 
         ", XF86WLAN, exec, nmcli radio wifi $(nmcli radio wifi | grep -q 'enabled' && echo 'off' || echo 'on')"
-
-        ", XF86NotificationCenter, exec, swaync-client -t -sw"
       ];
     };
   };
