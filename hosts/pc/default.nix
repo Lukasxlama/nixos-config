@@ -3,7 +3,12 @@
 {
   imports = [
     ./hardware-configuration.nix
+
     ../common
+    ../../modules/nixos/audio
+    ../../modules/nixos/desktop
+    ../../modules/nixos/network
+    ../../modules/nixos/programs
   ];
 
   networking.hostName = "pc";
@@ -13,7 +18,7 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  home-manager.users.lukas = {
+  home-manager.users.noel = {
     imports = [ ./monitor.nix ];
   };
 

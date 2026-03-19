@@ -10,13 +10,13 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  services.getty.helpLine = "nixos-config by Lukasxlama; see https://github.com/Lukasxlama/nixos-config.git";
+  services.getty.helpLine = "nixos-config by noex; see https://github.com/noex/nixos-config.git";
 
   systemd.services."getty@tty1" = {
     overrideStrategy = "asDropin";
     serviceConfig.ExecStart = [
       ""
-      "@${pkgs.util-linux}/sbin/agetty agetty --skip-login --login-options lukas %I $TERM"
+      "@${pkgs.util-linux}/sbin/agetty agetty --skip-login --login-options noel %I $TERM"
     ];
   };
 

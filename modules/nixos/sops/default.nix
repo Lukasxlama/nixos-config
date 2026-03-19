@@ -4,7 +4,7 @@
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFile = ../../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
 
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
@@ -14,8 +14,8 @@
     age.generateKey = true;
 
     secrets.git_ssh_key = {
-      owner = "lukas";
-      path = "/home/lukas/.ssh/id_git";
+      owner = "noel";
+      path = "/home/noel/.ssh/id_git";
     };
   };
 }

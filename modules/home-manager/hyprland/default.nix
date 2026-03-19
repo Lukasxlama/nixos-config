@@ -5,8 +5,8 @@
 }:
 
 let
-  videoWallpaper = ./assets/background/animated_dogs.mp4;
-  fallbackImage = ./assets/background/animated_dogs.jpg;
+  videoWallpaper = ../../../assets/background/animated_dogs.mp4;
+  fallbackImage = ../../../assets/background/animated_dogs.jpg;
 
   startWallpaper = pkgs.writeShellScript "start-wallpaper" ''
     pkill mpvpaper || true

@@ -5,15 +5,15 @@
     enable = true;
     settings = {
       user = {
-        name = "Lukas Sanz";
-        email = "lukassanz11@gmail.com";
+        name = "noex";
+        email = "github@noex.dev";
       };
       gpg.format = "ssh";
       commit.gpgsign = true;
     };
 
     signing = {
-      key = "/home/lukas/.ssh/id_git";
+      key = "/home/noel/.ssh/id_git";
       signByDefault = true;
     };
   };
@@ -24,12 +24,12 @@
 
     matchBlocks = {
       "github.com" = {
-        identityFile = "/home/lukas/.ssh/id_git";
+        identityFile = "/home/noel/.ssh/id_git";
         identitiesOnly = true;
       };
 
       "git.robo4you.at" = {
-        identityFile = "/home/lukas/.ssh/id_git";
+        identityFile = "/home/noel/.ssh/id_git";
         identitiesOnly = true;
       };
 

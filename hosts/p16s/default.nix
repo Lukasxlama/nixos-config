@@ -7,9 +7,14 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
-    ../common
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p16s-amd-gen1
+    ./hardware-configuration.nix
+
+    ../common
+    ../../modules/nixos/audio
+    ../../modules/nixos/desktop
+    ../../modules/nixos/network
+    ../../modules/nixos/programs
   ];
 
   boot.kernelModules = [

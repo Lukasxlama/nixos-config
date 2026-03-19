@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  screenshot = ./assets/background/animated_dogs.jpg;
+  screenshot = ../../../assets/background/animated_dogs.jpg;
 in
 {
   programs.hyprlock = {

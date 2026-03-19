@@ -13,11 +13,11 @@
     settings = {
       theme.matugen = true;
       theme.matugen_settings = {
-        wallpaper = "/home/lukas/nixos-config/users/lukas/assets/background/animated_dogs.jpg";
+        wallpaper = "../../../assets/background/animated_dogs.jpg";
         scheme = "scheme-tonal-spot";
       };
 
-      wallpaper.image = "/home/lukas/nixos-config/users/lukas/assets/background/animated_dogs.jpg";
+      wallpaper.image = "../../../assets/background/animated_dogs.jpg";
 
       bar = {
         layouts."0" = {
@@ -61,7 +61,7 @@
       };
 
       menus.dashboard = {
-        user.name = "Lukas";
+        user.name = "noel";
         shortcuts.enabled = false;
         directories.enabled = false;
         stats.enabled = true;

@@ -1,5 +1,5 @@
 {
-  description = "nixos-config by Lukasxlama; see https://github.com/Lukasxlama/nixos-config.git";
+  description = "nixos-config by noex; see https://github.com/noex/nixos-config.git";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -27,7 +27,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             { nixpkgs.config.allowUnfree = true; }
-            ./hosts/${hostname}/default.nix # <--- Hier passiert die Magie
+            ./hosts/${hostname}/default.nix
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
@@ -35,7 +35,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.lukas = import ./users/lukas/default.nix;
+                users.noel = import ./users/noel/default.nix;
               };
             }
           ];

@@ -44,7 +44,7 @@
     brightnessctl
     wdisplays
 
-    davinci-resolve
+    # davinci-resolve
     bambu-studio
   ];
 }
