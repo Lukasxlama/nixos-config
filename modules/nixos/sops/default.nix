@@ -17,5 +17,9 @@
       owner = "noel";
       path = "/home/noel/.ssh/id_git";
     };
+
+    secrets.noel_password = {
+      neededForUsers = true;
+    };
   };
 }

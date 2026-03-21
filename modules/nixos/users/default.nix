@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   users.users.noel = {
@@ -10,5 +10,6 @@
       "kvm"
     ];
     shell = pkgs.zsh;
+    hashedPasswordFile = config.sops.secrets.noel_password.path;
   };
 }
