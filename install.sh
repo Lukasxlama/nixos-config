@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 set -euo pipefail
 
 if [ "$EUID" -ne 0 ]; then
@@ -14,12 +14,15 @@ fi
 
 HOST=$1
 
+export NIX_CONFIG="experimental-features = nix-command flakes"
+
 echo "Starting automated NixOS installation for host: $HOST"
+
 
 nix shell nixpkgs#git-lfs -c git lfs install
 nix shell nixpkgs#git-lfs -c git lfs pull
 
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko --flake ".#$HOST"
+nix run github:nix-community/disko/latest -- --mode disko --flake ".#$HOST"
 
 chmod 755 /mnt
 umount /mnt/boot || true
