@@ -6,17 +6,30 @@
     xwayland.enable = true;
   };
 
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
+        user = "greeter";
+      };
+    };
+  };
+
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
-    ];
-    config.common.default = [
-      "hyprland"
-      "gtk"
-    ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config = {
+      hyprland = {
+        default = [
+          "gtk"
+          "hyprland"
+        ];
+      };
+    };
   };
+
+  xdg.mime.enable = true;
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -26,23 +39,7 @@
   services.dbus.enable = true;
   security.polkit.enable = true;
   programs.dconf.enable = true;
-
   services.gnome.gnome-keyring.enable = true;
-
-  services.getty.helpLine = "nixos-config by noex; see https://github.com/noex/nixos-config.git";
-  systemd.services."getty@tty1" = {
-    overrideStrategy = "asDropin";
-    serviceConfig.ExecStart = [
-      ""
-      "@${pkgs.util-linux}/sbin/agetty agetty --skip-login --login-options noel %I $TERM"
-    ];
-  };
-
-  programs.zsh.loginShellInit = ''
-    if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-      exec Hyprland # Wir rufen Hyprland direkt auf
-    fi
-  '';
 
   environment.systemPackages = with pkgs; [
     polkit_gnome

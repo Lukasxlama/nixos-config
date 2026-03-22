@@ -36,14 +36,6 @@
     dedicatedServer.openFirewall = true;
   };
 
-  services.flatpak = {
-    enable = true;
-    packages = [
-      "flathub:com.bambulab.BambuStudio"
-    ];
-    update.onActivation = true;
-  };
-
   environment.systemPackages = with pkgs; [
     tree
     curl

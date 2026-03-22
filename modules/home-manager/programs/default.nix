@@ -48,6 +48,7 @@
     bitwarden-desktop
     signal-desktop
     discord
+    orca-slicer
 
     btop
     vlc

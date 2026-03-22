@@ -18,7 +18,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,7 +32,6 @@
       disko,
       impermanence,
       home-manager,
-      nix-flatpak,
       sops-nix,
       ...
     }@inputs:
@@ -53,7 +51,6 @@
             lanzaboote.nixosModules.lanzaboote
             disko.nixosModules.disko
             sops-nix.nixosModules.sops
-            nix-flatpak.nixosModules.nix-flatpak
             home-manager.nixosModules.home-manager
             {
               home-manager = {

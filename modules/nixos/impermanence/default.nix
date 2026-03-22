@@ -10,6 +10,7 @@
       "/var/lib/networkmanager"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
+      "/var/lib/flatpak"
       "/etc/ssh"
       "/etc/secureboot"
     ];
@@ -25,14 +26,17 @@
         "Music"
         "Videos"
 
-        ".mozilla"
         ".ssh"
         ".local/share/keyrings"
+        ".config/mozilla/firefox"
+        ".config/OrcaSlicer"
         ".config/discord"
         ".config/Signal"
         ".config/Bitwarden"
         ".local/share/Anki2"
         ".local/share/Steam"
+        ".local/share/flatpak"
+        ".var/app"
         ".steam"
       ];
       files = [
