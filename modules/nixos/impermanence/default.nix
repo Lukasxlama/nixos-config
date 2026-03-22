@@ -8,6 +8,7 @@
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/networkmanager"
+      "/etc/NetworkManager/system-connections"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
       "/var/lib/flatpak"
