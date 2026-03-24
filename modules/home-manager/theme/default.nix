@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home.pointerCursor = {
@@ -19,6 +19,12 @@
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
+
+    gtk4.theme = {
+      name = "Orchis-Dark";
+      package = pkgs.orchis-theme;
+    };
+
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
     gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
   };

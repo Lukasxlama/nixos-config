@@ -44,7 +44,7 @@
   };
 
   home.packages = with pkgs; [
-    firefox
+    protonmail-desktop
     bitwarden-desktop
     signal-desktop
     discord

@@ -56,7 +56,6 @@
     papirus-icon-theme
     bibata-cursors
     orchis-theme
-    firefox
     xdg-utils
   ];
 }
