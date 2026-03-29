@@ -26,6 +26,9 @@
     lfs.enable = true;
   };
 
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
   virtualisation.docker.enable = true;
 
   services.tailscale.enable = true;
