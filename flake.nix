@@ -17,7 +17,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,7 +46,10 @@
       mkSystem =
         hostname:
         nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs self;
+          };
+
           modules = [
             {
               nixpkgs.config.allowUnfree = true;
@@ -61,7 +63,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = { inherit inputs; };
+                extraSpecialArgs = { inherit inputs self; };
                 users.noel = import ./users/noel/default.nix;
               };
             }
