@@ -9,7 +9,7 @@ in
     ../../modules/home-manager/hyprlock
     ../../modules/home-manager/hyprpanel
     ../../modules/home-manager/programs
-    ../../modules/home-manager/firefox
+    ../../modules/home-manager/zen
     ../../modules/home-manager/rofi
     ../../modules/home-manager/shell
     ../../modules/home-manager/theme

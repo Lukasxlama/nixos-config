@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   programs.hyprland = {
@@ -37,7 +37,7 @@
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
+    DEFAULT_BROWSER = "${inputs.zen-browser.packages.${pkgs.system}.default}/bin/zen";
   };
 
   services.dbus.enable = true;

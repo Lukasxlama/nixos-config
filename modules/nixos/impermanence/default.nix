@@ -58,8 +58,9 @@
         ".local/share/Steam"
         ".steam"
 
-        # Firefox Persistent Data
+        # Persistent Browser Data
         ".mozilla"
+        ".config/zen"
       ];
 
       files = [
